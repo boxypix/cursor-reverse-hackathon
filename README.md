@@ -1,3 +1,9 @@
+My version of the Cursor hackathon problem solution
+- Code builds
+- 3D model loading speed reduced by 5.6 times.
+- Tier 1-2 documentation (not for Tier 3, but I started working on the graphical interface and stopped at the current version)
+![Preview](Preview.gif)
+-------------
 # Is this javascripts?😫
 
 ## 🎯 Hackathon Task Overview
