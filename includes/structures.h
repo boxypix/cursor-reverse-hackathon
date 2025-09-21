@@ -16,6 +16,42 @@ typedef struct 				s_matrix
 	GLuint 					view;
 }							t_matrix;
 
+typedef struct 				s_ui_button
+{
+	float					x;
+	float					y;
+	float					width;
+	float					height;
+	char					*text;
+	int						active;
+}							t_ui_button;
+
+typedef struct 				s_mouse
+{
+	double					last_x;
+	double					last_y;
+	int						first_mouse;
+	float					yaw;
+	float					pitch;
+}							t_mouse;
+
+typedef struct 				s_ui
+{
+	t_ui_button				render_buttons[3];  // Line, Solid, Shiny
+	t_ui_button				bg_buttons[3];      // Black, Gradient, Blue
+	t_ui_button				exit_button;        // X button
+	t_ui_button				input_field;        // Parameter input field
+	t_ui_button				ok_button;          // OK button for input
+	
+	GLuint					ui_vao;
+	GLuint					ui_vbo;
+	GLuint					ui_shader_program;
+	GLuint					ui_vertex_shader;
+	GLuint					ui_fragment_shader;
+	
+	t_mouse					*mouse;
+}							t_ui;
+
 typedef struct 				s_gl
 {
 	GLFWwindow 				*window;
@@ -33,6 +69,7 @@ typedef struct 				s_gl
 	uint 					num_pts;
 	uint					num_tris;
 	t_matrix 				*matrix;
+	t_ui					*ui;
 }							t_gl;
 
 typedef struct 				s_julia

@@ -1,6 +1,46 @@
 #include "morphosis.h"
 
-float3 						**alloc_float3_arr(float3 **mem, uint2 *len)
+// Optimized memory allocation with exponential growth to avoid O(n²) complexity
+float3						**alloc_float3_arr_optimized(float3 **mem, uint2 *len, uint *capacity)
+{
+	uint 					required_size = len->x + len->y;
+	
+	if (!required_size)
+		return NULL;
+	
+	// If we need more space than current capacity, grow exponentially
+	if (required_size > *capacity)
+	{
+		// Grow by 1.5x or to required size, whichever is larger
+		uint new_capacity = (*capacity > 0) ? *capacity : 16;
+		while (new_capacity < required_size)
+			new_capacity = new_capacity + (new_capacity >> 1); // 1.5x growth
+		
+		if (!mem)
+		{
+			if (!(mem = (float3 **)malloc(sizeof(float3 *) * new_capacity)))
+				return NULL;
+		}
+		else
+		{
+			if (!(mem = (float3 **)realloc(mem, sizeof(float3 *) * new_capacity)))
+				return NULL;
+		}
+		
+		// Allocate memory for new triangles
+		for (uint c = *capacity; c < new_capacity; c++)
+		{
+			if (!(mem[c] = (float3 *)malloc(3 * sizeof(float3))))
+				return NULL;
+		}
+		*capacity = new_capacity;
+	}
+	
+	return mem;
+}
+
+// Legacy function - simplified version without optimization for now
+float3						**alloc_float3_arr(float3 **mem, uint2 *len)
 {
 	uint 					size;
 

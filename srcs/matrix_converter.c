@@ -214,8 +214,8 @@ static int					**find_mean(int	***matrix)
 void							process_matrix(char *file, t_mat_conv_data *data, int mode)
 {
 	int						fd;
-	int						fd_result_mean;
-	char					*line;
+	// int						fd_result_mean; // Unused variable removed
+	char					*line = NULL; // Initialize to prevent uninitialized usage
 	int						***decimals;
 	int						**mean;
 

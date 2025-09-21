@@ -155,3 +155,9 @@ TYPE 			cl_quat_mod(cl_quat q)
 	tmp = cl_quat_mult(q, tmp);
 	return (sqrt((TYPE)((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z) + (tmp.w * tmp.w))));
 }
+
+// Optimized version that returns squared magnitude to avoid sqrt()
+TYPE 			cl_quat_mod_squared(cl_quat q)
+{
+	return (q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
+}

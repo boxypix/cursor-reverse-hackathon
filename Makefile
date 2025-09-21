@@ -19,6 +19,7 @@ SRC = 	main.c \
         gl_points.c \
         gl_init.c \
         gl_calculations.c\
+        gl_ui.c \
         \
         obj.c \
         \
@@ -51,9 +52,9 @@ LIB_INC = libft.h get_next_line.h
 LIB_INC_DIR = ./libft/
 LIB_INCS = $(addprefix $(LIB_INC_DIR), $(LIB_INC))
 
-FLAGS = -O3 -Wall -I$(INC_DIR) -I$(LIB_INC_DIR)
-GL_LIBS = -framework OpenGL -lGLEW -lglfw -I/usr/local/include
-OPENSSL_LIB = -lssl -lcrypto -L/usr/local/opt/openssl@1.1/lib -I/usr/local/opt/openssl@1.1/include
+FLAGS = -O3 -Wall -I$(INC_DIR) -I$(LIB_INC_DIR) -I/opt/homebrew/opt/glfw/include -I/opt/homebrew/opt/glew/include -I/opt/homebrew/opt/cglm/include -I/opt/homebrew/opt/openssl@3/include
+GL_LIBS = -framework OpenGL -L/opt/homebrew/opt/glfw/lib -L/opt/homebrew/opt/glew/lib -lglfw -lglew
+OPENSSL_LIB = -L/opt/homebrew/opt/openssl@3/lib -lssl -lcrypto
 
 all: $(NAME)
 

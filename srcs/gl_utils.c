@@ -2,11 +2,10 @@
 
 void 						framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
-	int 				i = 0;
 	glViewport(0, 0, width, height);
-
-	if (window)
-		i++;
+	
+	// Suppress unused parameter warning
+	(void)window;
 }
 
 void 						processInput(GLFWwindow *window, t_gl *gl)
@@ -22,7 +21,12 @@ void 						processInput(GLFWwindow *window, t_gl *gl)
 
 void 						init_gl(t_gl *gl)
 {
-	glfwInit();
+	if (!glfwInit())
+	{
+		printf("ERROR: Failed to initialize GLFW\n");
+		exit(1);
+	}
+	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -32,15 +36,24 @@ void 						init_gl(t_gl *gl)
 	glfwWindowHint(GLFW_STENCIL_BITS, 8);
 
 	gl->window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "Morphosis", NULL, NULL);
-	glfwMakeContextCurrent(gl->window);
-	glewExperimental = GL_TRUE;
-	glewInit();
+	
 	if (!gl->window)
 	{
-		printf("Failed to create GLFW window\n");
+		printf("ERROR: Failed to create GLFW window\n");
 		glfwTerminate();
 		exit (1);
 	}
+	
+	glfwMakeContextCurrent(gl->window);
+	
+	glewExperimental = GL_TRUE;
+	GLenum glew_status = glewInit();
+	if (glew_status != GLEW_OK)
+	{
+		printf("ERROR: Failed to initialize GLEW: %s\n", glewGetErrorString(glew_status));
+		exit(1);
+	}
+	
 	glfwSetFramebufferSizeCallback(gl->window, framebuffer_size_callback);
 	glEnable(GL_DEPTH_TEST);
 }

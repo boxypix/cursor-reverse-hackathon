@@ -13,7 +13,7 @@ void 						gl_calc_transforms(t_gl *gl)
 	matrix->view = glGetUniformLocation(gl->shaderProgram, "view");
 	glUniformMatrix4fv(matrix->view, 1, GL_FALSE, (float *)matrix->view_mat);
 
-	glm_perspective(glm_rad(45.0f), (SRC_WIDTH / SRC_HEIGHT), 1.0f, 10.0f, matrix->projection_mat);
+	glm_perspective(glm_rad(45.0f), (float)SRC_WIDTH / (float)SRC_HEIGHT, 0.1f, 100.0f, matrix->projection_mat);
 	projection = glGetUniformLocation(gl->shaderProgram, "proj");
 	glUniformMatrix4fv(projection, 1, GL_FALSE, (float *)matrix->projection_mat);
 }

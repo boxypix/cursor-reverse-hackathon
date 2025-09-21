@@ -42,6 +42,7 @@ t_gl						*init_gl_struct(void)
 	gl->tris = NULL;
 	gl->num_pts = 0;
 	gl->matrix = initGlMatrices();
+	gl->ui = NULL;
 	return gl;
 }
 

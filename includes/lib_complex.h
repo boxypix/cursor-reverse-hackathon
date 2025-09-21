@@ -45,5 +45,6 @@ cl_quat			cl_quat_mult(cl_quat q1, cl_quat q2);
 cl_quat 		cl_quat_sum(cl_quat q1, cl_quat q2);
 cl_quat 		cl_quat_conjugate(cl_quat q);
 TYPE 			cl_quat_mod(cl_quat q);
+TYPE 			cl_quat_mod_squared(cl_quat q);
 
 #endif

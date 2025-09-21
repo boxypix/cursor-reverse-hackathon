@@ -29,7 +29,6 @@ void						write_mesh(t_data *data, int surface, obj *o)
 	int						polygon;
 	int 					verts[3];
 	float 					*vertex;
-	float					percent;
 
 	if (!(vertex = (float *)malloc(3 * sizeof(float))))
 		error(MALLOC_FAIL_ERR, data);
@@ -37,7 +36,10 @@ void						write_mesh(t_data *data, int surface, obj *o)
 	i = 0;
 	while (i < data->gl->num_tris)
 	{
-		printf("Written: %.3f %%\n", (((float)i / data->gl->num_tris) * 100));
+		// Show progress every 1000 triangles instead of every triangle
+		if (i % 1000 == 0 || i == data->gl->num_tris - 1)
+			printf("Written: %.3f %%\n", (((float)i / data->gl->num_tris) * 100));
+		
 		polygon = obj_add_poly(o, surface);
 		for (int v = 0; v < 3; v++)
 		{

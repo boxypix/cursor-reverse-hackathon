@@ -2,8 +2,8 @@
 
 int					***read_poem(FILE *stream)
 {
-	int				i;
-	int				j;
+	// int				i; // Unused variables removed
+	// int				j;
 	char			c;
 	int 			nbr;
 	int 			***matrix;
